@@ -169,6 +169,14 @@ public class HashMap<K, V> {
 		}
 	}
 
+	public int size() {
+		return size;
+	}
+
+	public boolean isEmpty() {
+		return size == 0;
+	}
+
 	static int indexFor(int h, int length) {
 		return h & (length - 1);
 	}
