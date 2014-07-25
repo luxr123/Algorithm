@@ -16,10 +16,10 @@ public class BinaryTree {
 		Node right;
 		int data;
 
-		Node(int newData) {
-			left = null;
-			right = null;
-			data = newData;
+		Node(int data) {
+			this.left = null;
+			this.right = null;
+			this.data = data;
 		}
 	}
 
@@ -98,6 +98,17 @@ public class BinaryTree {
 	}
 
 	/**
+	 * 用一个函数判断一棵树是否平衡
+	 */
+	public boolean isBalanced() {
+		return isBalanced(root);
+	}
+
+	private boolean isBalanced(Node root) {
+		return (maxDepth(root) - minDepth(root) <= 1);
+	}
+	
+	/**
 	 * Returns the max root-to-leaf depth of the tree. Uses a recursive helper
 	 * that recurs down to find the max depth.
 	 */
@@ -111,6 +122,18 @@ public class BinaryTree {
 		int lDepth = maxDepth(node.left);
 		int rDepth = maxDepth(node.right);
 		return Math.max(lDepth, rDepth) + 1;
+	}
+	
+	public int minDepth() {
+		return minDepth(root);
+	}
+	
+	private int minDepth(Node node) {
+		if (node == null)
+			return 0;
+		int lDepth = maxDepth(node.left);
+		int rDepth = maxDepth(node.right);
+		return Math.min(lDepth, rDepth) + 1;
 	}
 
 	/**
@@ -344,7 +367,24 @@ public class BinaryTree {
 		else
 			return (false);
 	}
-
+	
+	/**
+	 * 给定一个有序数组(递增)，写程序构建一棵具有最小高度的二叉树。
+	 */
+	private static Node addToTree(int arr[], int start, int end) {
+		if (end < start)
+			return null;
+		int mid = start + (end - start) / 2;
+		Node parent = new Node(arr[mid]);
+		parent.left = addToTree(arr, start, mid - 1);
+		parent.right = addToTree(arr, mid + 1, end);
+		return parent;
+	}
+	
+	public static Node createMinimalBST(int array[]) {
+		return addToTree(array, 0, array.length - 1);
+	}
+	
 	public static void main(String[] args) {
 		BinaryTree biTree = new BinaryTree();
 		biTree.insert(5);
@@ -363,6 +403,10 @@ public class BinaryTree {
 
 		biTree.doubleTree();
 		biTree.printTree();
+		
+		int[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+		Node node = BinaryTree.createMinimalBST(arr);
+		biTree.printTree(node);
 	}
 
 }

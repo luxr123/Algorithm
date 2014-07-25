@@ -9,25 +9,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- * Simple to Introduction
- * 
- * @ProjectName: [Algorithm]
- * @Package: [dijkstra]
- * @ClassName: [DijkstraAlgorithm]
- * @Description: [一句话描述该类的功能]
- * @Author: [xiaorui.lu]
- * @CreateDate: [2014年7月3日 下午8:51:50]
- * @UpdateUser: [xiaorui.lu]
- * @UpdateDate: [2014年7月3日 下午8:51:50]
- * @UpdateRemark: [说明本次修改内容]
- * @Version: [v1.0]
- * 
- */
-
 public class DijkstraAlgorithm {
 
-//	private final List<Vertex> nodes;
+	// private final List<Vertex> nodes;
 	private final List<Edge> edges;
 	private Set<Vertex> settledNodes;
 	private Set<Vertex> unSettledNodes;
@@ -36,7 +20,7 @@ public class DijkstraAlgorithm {
 
 	public DijkstraAlgorithm(Graph graph) {
 		// create a copy of the array so that we can operate on this array
-//		this.nodes = new ArrayList<Vertex>(graph.getVertexes());
+		// this.nodes = new ArrayList<Vertex>(graph.getVertexes());
 		this.edges = new ArrayList<Edge>(graph.getEdges());
 	}
 
@@ -66,7 +50,7 @@ public class DijkstraAlgorithm {
 		}
 
 	}
-	
+
 	private List<Vertex> getNeighbors(Vertex node) {
 		List<Vertex> neighbors = new ArrayList<Vertex>();
 		for (Edge edge : edges) {
@@ -134,4 +118,11 @@ public class DijkstraAlgorithm {
 		return path;
 	}
 
+	/**
+	 * 给定一个有向图，设计算法判断两结点间是否存在路径。
+	 */
+	public boolean search(Vertex start, Vertex end) {
+		execute(start);
+		return getPath(end) == null ? false : true;
+	}
 }

@@ -4,21 +4,6 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- * Simple to Introduction
- * 
- * @ProjectName: [Algorithm]
- * @Package: [dijkstra]
- * @ClassName: [Test]
- * @Description: [一句话描述该类的功能]
- * @Author: [xiaorui.lu]
- * @CreateDate: [2014年7月3日 下午8:53:14]
- * @UpdateUser: [xiaorui.lu]
- * @UpdateDate: [2014年7月3日 下午8:53:14]
- * @UpdateRemark: [说明本次修改内容]
- * @Version: [v1.0]
- * 
- */
 public class Test {
 
 	private static List<Vertex> nodes;
@@ -47,10 +32,10 @@ public class Test {
 		addLane("Edge_11", 1, 10, 600);
 
 		// Lets check from location Loc_1 to Loc_10
-		Graph graph = new Graph(edges);
+		Graph graph = new Graph(nodes, edges);
 		DijkstraAlgorithm dijkstra = new DijkstraAlgorithm(graph);
-		dijkstra.execute(nodes.get(0));
-		LinkedList<Vertex> path = dijkstra.getPath(nodes.get(10));
+		dijkstra.execute(graph.getVertexes().get(0));
+		LinkedList<Vertex> path = dijkstra.getPath(graph.getVertexes().get(10));
 
 		// assertNotNull(path);
 		// assertTrue(path.size() > 0);
@@ -58,7 +43,8 @@ public class Test {
 			for (Vertex vertex : path) {
 				System.out.println(vertex);
 			}
-
+		
+		System.out.println(dijkstra.search(graph.getVertexes().get(0), graph.getVertexes().get(5)));
 	}
 
 	private static void addLane(String laneId, int sourceLocNo, int destLocNo, int duration) {

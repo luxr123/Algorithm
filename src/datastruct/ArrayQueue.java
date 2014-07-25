@@ -2,6 +2,7 @@ package datastruct;
 
 /**
  * Java : 数组实现“队列”，只能存储int数据。
+ * 使用两个数组实现一个队列
  * 
  * @author xiaorui.lu
  */
