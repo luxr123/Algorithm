@@ -1,16 +1,16 @@
 package sort;
+
 public class QuikSortAdv {
 
 	public static int partition(int[] arr, int low, int high) {
 		int pivot = arr[low]; // 数组的第一个作为中轴
 		while (low < high) {
-			while (low < high && arr[high] >= pivot) {
+			while (low < high && arr[high] >= pivot)
 				high--;
-			}
 			arr[low] = arr[high]; // 比中轴小的记录移到低端
-			while (low < high && arr[low] <= pivot) {
+			
+			while (low < high && arr[low] <= pivot)
 				low++;
-			}
 			arr[high] = arr[low]; // 比中轴大的记录移到高端
 		}
 		arr[low] = pivot; // 中轴记录到尾

@@ -2,21 +2,23 @@ package test;
 
 public class Test {
 
-	public static void main(String[] args) {
-		String str = "ak";
-
-		System.out.println(isUniqueChars(str));
-	}
-
-	public static boolean isUniqueChars(String str) {
-		int checker = 0;
-		for (int i = 0; i < str.length(); ++i) {
-			int val = str.charAt(i) - 'a';
-			if ((checker & (1 << val)) > 0)
-				return false;
-			checker |= (1 << val);
+	static long fibo(long n) {
+		if (n == 1 | n == 2)
+			return 1;
+		long res = 1;
+		long a = 1, b = 1;
+		while (n > 2) {
+			a = b;
+			b = res;
+			res = a + b;
+			n--;
 		}
-		return true;
+		return res;
 	}
-	
+
+	public static void main(String[] args) {
+		System.out.println(fibo(6));
+		
+		System.out.println(0 | (1<<8));
+	}
 }

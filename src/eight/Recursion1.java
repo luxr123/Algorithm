@@ -110,6 +110,10 @@ public class Recursion1 {
 	 * C(m-1+n-1, m-1)=(m-1+n-1)! / ( (m-1)! * (n-1)! )
 	 * </pre>
 	 */
+	/*
+	 * 机器人从(1, 1)走到(m, n)一定要向下走m-1次，向右走n-1次，不管这过程中是怎么走的。
+	 * 因此，一共可能的路径数量就是从总的步数(m-1+n-1)里取出(m-1)步，作为向下走的步子， 剩余的(n-1)步作为向右走的步子。
+	 */
 	public static BigDecimal path1(int m, int n) {
 		BigDecimal d = fact(m - 1 + n - 1);
 		BigDecimal d1 = fact(m - 1).multiply(fact(n - 1));
@@ -122,16 +126,16 @@ public class Recursion1 {
 		return fact(n - 1).multiply(new BigDecimal(n));
 	}
 
-	static Stack<Point> sp = new Stack<Point>();
-	final static int MAXN = 20;
-	static int[][] g = new int[MAXN][MAXN];
-	static Point[] points = new Point[MAXN + MAXN];
-
 	/**
 	 * 如果有一些格子，机器人是不能踏上去的(比如说放了地雷XD); 如果我们只要输出它其中一条可行的路径即可， 那么我们可以从终点
 	 * (m,n)开始回溯，遇到可走的格子就入栈， 如果没有格子能到达当前格子，当前格子则出栈。最后到达(1, 1)时， 栈中正好保存了一条可行路径
 	 */
-	static boolean getPath(int n, int m) {
+
+	static Stack<Point> sp = new Stack<Point>();
+	final static int MAXN = 20;
+	static int[][] g = new int[MAXN][MAXN];
+	
+	static boolean getPath(int m, int n) {
 		Point p = new Point();
 		p.setX(m);
 		p.setY(n);
@@ -139,10 +143,10 @@ public class Recursion1 {
 		if (n == 0 && m == 0)// current_path
 			return true;
 		boolean suc = false;
-		if (m > 0 && g[m - 1][n] == 1)// Try right
-			suc = getPath(m - 1, n);// Free! Go right
-		if (!suc && n > 0 && g[m][n - 1] == 1)// Try down
-			suc = getPath(m, n - 1);// Free! Go down
+		if (m > 0 && g[m - 1][n] == 1)// Try up
+			suc = getPath(m - 1, n);// Free! Go up
+		if (!suc && n > 0 && g[m][n - 1] == 1)// Try left
+			suc = getPath(m, n - 1);// Free! Go left
 		if (!suc)
 			sp.pop(); // Wrong way!
 		return suc;
@@ -152,6 +156,8 @@ public class Recursion1 {
 	 * 我们从(1, 1)开始，如果某个格子可以走， 我们就将它保存到路径数组中；如果不能走，则回溯到上一个格子，
 	 * 继续选择向右或者向下走。当机器人走到右下角的格子(M, N)时，即可输出一条路径。 然后程序会退出递归，回到上一个格子，找寻下一条可行路径。
 	 */
+	static Point[] points = new Point[MAXN + MAXN];
+	
 	static void printPaths(int m, int n, int M, int N, int len) {
 		if (g[m][n] == 0)
 			return;
@@ -180,7 +186,7 @@ public class Recursion1 {
 				g[i][j] = 1;
 			}
 		}
-//		g[1][2] = 0;
+		// g[1][2] = 0;
 		// g[2][2] = 0;
 		System.out.println(getPath(m - 1, n - 1));
 

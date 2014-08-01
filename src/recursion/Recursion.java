@@ -27,6 +27,16 @@ public class Recursion {
 		return res;
 	}
 
+	public static String decimalToBinary3(int num) {
+		String res = "";
+		while (num > 0) {
+			int r = num % 2;
+			num >>= 1;
+			res = r + res;
+		}
+		return res;
+	}
+
 	/**
 	 * 递归方法sum，求1+2+...+100 的求和
 	 */
@@ -38,7 +48,7 @@ public class Recursion {
 	}
 
 	/**
-	 * 递归方法yueshu,求两个数的最大公约数 ,用两个数的绝对值与这两个数较小的那个一直比较，直到相等为止。
+	 * 递归方法yueshu,求两个数的最大公约数 ,用两个数差的绝对值与这两个数较小的那个一直比较，直到相等为止。
 	 */
 	public static void yueshu(int num1, int num2) {
 		if (num1 == num2)
@@ -108,16 +118,14 @@ public class Recursion {
 	 * m的n次方 (递归版本)
 	 */
 	public static double pow(double m, int n) {
-		double result;
 		if (n == 0)
 			return 1;
 		if (n > 0) {
 			if (n % 2 == 0) {
-				result = pow(m, n / 2);
+				double result = pow(m, n / 2);
 				return result * result;
 			} else {
-				result = m * pow(m, (n - 1));
-				return result;
+				return m * pow(m, (n - 1));
 			}
 
 		} else {
@@ -135,17 +143,17 @@ public class Recursion {
 	 * </pre>
 	 */
 	public static double pow2(double m, int n) {
-		double result = 1;
+		double ret = 1;
 		if (n == 0)
 			return 1;
 		if (n > 0) {
 			while (n > 0) {
 				if ((n & 1) == 1)
-					result *= m;
+					ret *= m;
 				m *= m;
 				n >>= 1;
 			}
-			return result;
+			return ret;
 		} else {
 			return 1 / pow2(m, -n);
 		}
@@ -210,7 +218,7 @@ public class Recursion {
 	 */
 	private static void pow(long s[][], long a[][], long n) {
 		while (n > 0) {
-			if ((n & 1) == 1)
+			if ((n & 1) == 1)//奇数
 				mul(s, s, a);
 			mul(a, a, a);
 			n >>= 1;
@@ -230,30 +238,31 @@ public class Recursion {
 	}
 
 	public static void main(String[] args) {
-		System.out.println(decimalToBinary(31));
-		System.out.println(decimalToBinary2(14));
+		// System.out.println(decimalToBinary(31));
+		// System.out.println(decimalToBinary3(31));
+		// System.out.println(decimalToBinary2(14));
 
 		// yueshu(3, 9);
-		// hanon(4, 'A', 'B', 'C');
+		// hanon(3, 'A', 'B', 'C');
 
-		// System.out.println(josephus(18, 3));
-		// System.out.println(josephus3(18, 3));
+		System.out.println(josephus(18, 3));
+		System.out.println(josephus3(18, 3));
 		// josephus2(5, 3);
 		//
 		// System.out.println(pow(2, -3));
 		// System.out.println(pow2(2, -3));
 
-		System.out.println("xx");
-		System.out.println(fibo(30));
-		
-		long start = System.currentTimeMillis();
-		System.out.println(fibo1(100000000));
-		long end = System.currentTimeMillis();
-		System.out.println(end -start);
-		
-		start = System.currentTimeMillis();
-		System.out.println(fibo2(100000000));
-		end = System.currentTimeMillis();
-		System.out.println(end -start);
+		// System.out.println("xx");
+		// System.out.println(fibo(30));
+		//
+		// long start = System.currentTimeMillis();
+		// System.out.println(fibo1(100000000));
+		// long end = System.currentTimeMillis();
+		// System.out.println(end - start);
+		//
+		// start = System.currentTimeMillis();
+		// System.out.println(fibo2(100000000));
+		// end = System.currentTimeMillis();
+		// System.out.println(end - start);
 	}
 }

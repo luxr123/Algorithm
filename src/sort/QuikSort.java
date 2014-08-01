@@ -10,13 +10,11 @@ public class QuikSort {
 				tmp = arr[++i];
 				arr[i] = arr[j];
 				arr[j] = tmp;
-				System.out.println("i:" + i + ",j:" + j);
 			}
 		}
 		tmp = arr[++i];
 		arr[i] = arr[high];
 		arr[high] = tmp;
-		System.out.println("P:" + i);
 		return i;
 	}
 

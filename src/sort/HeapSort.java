@@ -1,4 +1,5 @@
 package sort;
+
 public class HeapSort {
 
 	/**
@@ -10,38 +11,39 @@ public class HeapSort {
 		if (source == null || source.length <= 1)
 			return;
 		int len = source.length;
-		bulidMaxHeap(source);
+		bulidMaxHeap(source, len);
 		for (int lastElement = len - 1; lastElement > 0; lastElement--) {
 			swap(source, 0, lastElement);
 			maxHeapily(source, 1, lastElement);
 		}
 	}
-	
-	/*public void k_min(int[] arr,int len,int k)
-	{
-		int i;
-		build_maxheap(arr,k);
-		for (i = k;i < len;i++)
-		{
-			if (arr[i] < arr[0])
-			{
+
+	/**
+	 * 
+	 * @param arr
+	 * @param len
+	 * @param k
+	 */
+	public void kMin(int[] arr, int len, int k) {
+		bulidMaxHeap(arr, k);
+		for (int i = k; i < len; i++) {
+			if (arr[i] < arr[0]) {
 				arr[0] = arr[i];
-				max_heapify(arr,1,k);
+				maxHeapily(arr, 1, k);
 			}
 		}
-	}*/
+	}
 
 	/**
 	 * 构建最大堆树
 	 * 
 	 * @param source
 	 */
-	private void bulidMaxHeap(int[] source) {
-		int hSize = source.length;
+	private void bulidMaxHeap(int[] source, int len) {
 		// beginFlag以后的都是叶子节点。
-		int beginFlag = (int) Math.floor(hSize / 2);
+		int beginFlag = (int) Math.floor(len / 2);
 		for (int i = beginFlag; i >= 1; i--) {
-			maxHeapily(source, i, hSize);
+			maxHeapily(source, i, len);
 		}
 	}
 
@@ -51,7 +53,7 @@ public class HeapSort {
 	 * 
 	 * @param source
 	 * @param i
-	 *            第i个元素，指的是从1开始的。因此后边在取数组元素的时候，都有  减一操作 (-1).
+	 *            第i个元素，指的是从1开始的。因此后边在取数组元素的时候，都有 减一操作 (-1).
 	 * @param heapSize
 	 */
 	private void maxHeapily(int[] source, int i, int heapSize) {
@@ -64,7 +66,7 @@ public class HeapSort {
 		if (heapSize >= right && source[right - 1] > source[largest - 1]) {
 			largest = right;
 		}
-		if (largest != i) {//将最大元素提升，并递归
+		if (largest != i) {// 将最大元素提升，并递归
 			swap(source, i - 1, largest - 1);
 			maxHeapily(source, largest, heapSize);
 		}
@@ -93,15 +95,17 @@ public class HeapSort {
 	public static void main(String[] args) {
 		HeapSort heapSort = new HeapSort();
 
-		int len = 10;
-		int[] arr = new int[len];
-		for (int i = 1; i < len; i++) {
-			arr[i] = (int) (Math.random() * 100 % 100);
-		}
+//		int len = 10;
+		int[] arr = new int[]{ 2, 0, 1, 8, 5, 4, 10, 16, 9, 13 };
+//		int[] arr = new int[len];
+//		for (int i = 1; i < len; i++) {
+//			arr[i] = (int) (Math.random() * 100 % 100);
+//		}
 
-		heapSort.heapSort(arr);
-		for (int i = 0; i < arr.length; i++)
+//		heapSort.heapSort(arr);
+		int k =6;
+		heapSort.kMin(arr, arr.length, k);
+		for (int i = 0; i < k; i++)
 			System.out.print(arr[i] + ",");
-
 	}
 }

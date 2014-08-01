@@ -1,6 +1,5 @@
 package sort;
 //二分查找V0.1实现版
-//copyright@2011 July
 
 //首先要把握下面几个要点：
 //right = n-1 => while(left <= right) => right = middle-1;

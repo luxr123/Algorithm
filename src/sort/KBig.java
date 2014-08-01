@@ -32,9 +32,9 @@ public class KBig {
 
 	public static void main(String[] args) {
 		KBig big = new KBig();
-		int[] arr = { 2, 1, 0, 8, 4, 5, 10, 16, 9, 13 };
-		int i, k = 9;
-		System.out.println(big.kBig(arr, 0, 9, k));
+		int[] arr = { 2, 0, 1, 8, 5, 4, 10, 16, 9, 13 };
+		int i, k = 6;
+		System.out.println(big.kBig(arr, 0, arr.length-1, k));
 		for (i = 0; i < k; i++)
 			System.out.print(arr[i] + ", ");
 	}

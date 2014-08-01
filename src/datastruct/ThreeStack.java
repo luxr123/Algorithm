@@ -7,7 +7,7 @@ package datastruct;
 public class ThreeStack {
 	int stackSize = 300;
 	int[] buffer = new int[stackSize * 3];
-	int[] stackPointer = { 0, 0, 0 }; // stack pointers to track top elem
+	int[] stackPointer = { 0, 0, 0 }; // stack pointers to track top element
 
 	void push(int stackNum, int value) {
 		/*

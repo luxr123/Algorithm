@@ -7,7 +7,7 @@ public class Whiles {
 	/**
 	 * A和B是两个有序数组(假设为递增序列)，而且A的长度足以放下A和B中所有的元素， 写一个函数将数组B融入数组A，并使其有序
 	 */
-	// 我们从A和B的尾部元素开始对比，每次取大的元素放在数组A的尾部， 这样一来，要放入的位置就不会出现上面的冲突问题。当对比结束时，
+	// 我们从A和B的尾部元素开始对比，每次取大的元素放在数组A的尾部， 这样一来，要放入的位置就不会出现冲突问题。当对比结束时，
 	// 即可得到一个排好序的数组A
 	public static void merge(int[] a, int[] b, int m, int n) {
 		int k = m + n - 1; // Index of last location of array b

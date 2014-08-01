@@ -42,7 +42,7 @@ public class OneLink<T> {
 
 	public boolean insert(T point) throws Exception {
 		Node<T> preNext = head.next;
-		Node<T> newNode = new Node(point, preNext);
+		Node<T> newNode = new Node<T>(point);
 		if (preNext != null) {
 			head.next = newNode;
 			newNode.next = preNext;
@@ -56,7 +56,6 @@ public class OneLink<T> {
 		Node<T> curr = head, prev = null;
 		boolean b = false;
 		while (curr != null) {
-
 			if (curr.data.equals(data)) {
 				// 判断是什么节点
 				if (curr == head) { // 如果删除的是头节点
@@ -64,13 +63,11 @@ public class OneLink<T> {
 					head = curr.next;
 					b = true;
 					return;
-				}
-				if (curr == tail) { // 如果删除的是尾节点
+				} else if (curr == tail) { // 如果删除的是尾节点
 					System.out.println('\n' + "delete tail node");
 
 					tail = prev;
 					prev.next = null;
-
 					b = true;
 					return;
 				} else { // 如果删除的是中间节点（即非头节点或非尾节点）
@@ -79,9 +76,7 @@ public class OneLink<T> {
 					b = true;
 					return;
 				}
-
 			}
-
 			prev = curr;
 			curr = curr.next;
 		}
@@ -96,13 +91,10 @@ public class OneLink<T> {
 			System.out.println("链表错误");
 			return;
 		} else {
-			System.out.print(head.data + " ");
-			curr = head.next;
-		}
-
-		while (curr != null) {
-			System.out.print(curr.data + " ");
-			curr = curr.next;
+			while (curr != null) {
+				System.out.print(curr.data + " ");
+				curr = curr.next;
+			}
 		}
 	}
 

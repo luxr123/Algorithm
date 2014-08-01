@@ -10,7 +10,7 @@ public class Recursion2 {
 	 * 写一个函数返回一个集合中的所有子集;
 	 * 
 	 * <pre>
-	 * 对于一个集合，它的子集一共有2n 个(包括空集和它本身)。
+	 * 对于一个集合，它的子集一共有2^n 个(包括空集和它本身)。
 	 * </pre>
 	 */
 
@@ -18,7 +18,7 @@ public class Recursion2 {
 	// 它的任何一个子集， 我们都可以理解为这个集合本身的每个元素是否出现而形成的一个序列。比如说， 对于集合{1, 2,
 	// 3}，空集表示一个元素都没出现，对应{0, 0, 0}； 子集{1, 3}，表示元素2没出现(用0表示)，1，3出现了(用1表示)，所以它对应
 	// {1, 0, 1}。这样一来，我们发现，{1, 2, 3}的所有子集可以用二进制数000到111
-	// 的8个数来指示。泛化一下，如果一个集合有n个元素，那么它可以用0到2n -1 总共2n
+	// 的8个数来指示。泛化一下，如果一个集合有n个元素，那么它可以用0到2^n -1 总共2^n
 	// 个数的二进制形式来指示。每次我们只需要检查某个二进制数的哪一位为1， 就把对应的元素加入到这个子集就OK
 	public static Set<Set<Integer>> getSubsets(int a[]) { // O(n2^n)
 		Set<Set<Integer>> subsets = new HashSet<Set<Integer>>();
@@ -27,9 +27,8 @@ public class Recursion2 {
 			Set<Integer> set = new HashSet<Integer>();
 			int idx = 0, j = i;
 			while (j > 0) {
-				if ((j & 1) == 1) {
+				if ((j & 1) == 1)
 					set.add(a[idx]);
-				}
 				idx++;
 				j >>= 1;
 			}
@@ -47,9 +46,8 @@ public class Recursion2 {
 			int k = i;
 			int index = 0;
 			while (k > 0) {
-				if ((k & 1) > 0) {
+				if ((k & 1) > 0)
 					subset.add(set.get(index));
-				}
 				k >>= 1;
 				index++;
 			}
@@ -99,12 +97,12 @@ public class Recursion2 {
 			return permutations;
 		}
 
-		char first = s.charAt(0); // get the first character
+		char firstChar = s.charAt(0); // get the first character
 		String remainder = s.substring(1); // remove the first character
 		ArrayList<String> words = getPerms(remainder);
 		for (String word : words) {
 			for (int j = 0; j <= word.length(); j++) {
-				permutations.add(insertCharAt(word, first, j));
+				permutations.add(insertCharAt(word, firstChar, j));
 			}
 		}
 		return permutations;
@@ -210,7 +208,7 @@ public class Recursion2 {
 	// 同列：c[r]==c[j]; 同对角线有两种可能，即主对角线方向和副对角线方向。
 	// 主对角线方向满足，行之差等于列之差：r-j==c[r]-c[j]; 副对角线方向满足， 行之差等于列之差的相反数：r-j==c[j]-c[r]。
 	// 只有满足了当前皇后和前面所有的皇后都不会互相攻击的时候，才能进入下一级递归
-	
+
 	static int columnForRow[] = new int[8];
 
 	static boolean check(int row) {
@@ -247,9 +245,9 @@ public class Recursion2 {
 	public static void main(String[] args) {
 		System.out.println(PlaceQueen(0));
 
-		// int[] a = { 1, 2, 3 };
-		// for (Set<Integer> s : getSubsets(a))
-		// System.out.println(s);
+//		int[] a = { 1, 2, 3 };
+//		for (Set<Integer> s : getSubsets(a))
+//			System.out.println(s);
 
 //		ArrayList<Integer> set = new ArrayList<Integer>() {
 //			{
@@ -260,17 +258,17 @@ public class Recursion2 {
 //
 //		};
 
-		// for(ArrayList<Integer> subs: getSubsets(set))
-		// System.out.println(subs);
-		// for (ArrayList<Integer> subs : getSubsets1(set, 0))
-		// System.out.println(subs);
+//		for (ArrayList<Integer> subs : getSubsets(set))
+//			System.out.println(subs);
+//		for (ArrayList<Integer> subs : getSubsets1(set, 0))
+//			System.out.println(subs);
 
-		// for (String s : getPerms("abc"))
-		// System.out.println(s);
+//		 for (String s : getPerms("abc"))
+//		 System.out.println(s);
 
-		// printPar(3);
+//		 printPar(3);
 
-		// System.out.println(sumN(100, 25));
-		// System.out.println(sumN1(0, 25, 100));
+		 System.out.println(sumN(100, 25));
+		 System.out.println(sumN1(0, 25, 100));
 	}
 }

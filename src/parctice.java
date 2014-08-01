@@ -48,24 +48,32 @@ public class parctice {
 	}
 
 	/**
-	 * 交换一个整数二进制表示中的奇数位和偶数位;
-	 * 分别将这个整数的奇数位和偶数位提取出来，然后移位取或即可。
+	 * 交换一个整数二进制表示中的奇数位和偶数位; 分别将这个整数的奇数位和偶数位提取出来，然后移位取或即可。
+	 * 
+	 * <pre>
+	 * 偶数位向右移一位 | 奇数位向左移一位
+	 * </pre>
 	 */
 	public static int swapOddEvenBits(int x) {
 		return (((x & 0xaaaaaaaa) >> 1) | ((x & 0x55555555) << 1));
 	}
 
 	public static void main(String[] args) {
-		System.out.println(bitSwapRequired(5, 3));
-		System.out.println(swapOddEvenBits(5));
-		
-		int ret=0;
-		for(int j=4; j>=0; --j){
-			int i = ((int) (Math.random() * 100)) % 2;
-			System.out.println("i:" + i);
-			ret = (ret << 1) | i;
-		}
-		System.out.println(ret);
-		//11010
+		// System.out.println(printBinary("10.5"));
+
+		System.out.println(Integer.toBinaryString(0xaaaaaaaa));
+		System.out.println(Integer.toBinaryString(0x55555555));
+
+		// System.out.println(bitSwapRequired(5, 3));
+		// System.out.println(swapOddEvenBits(5));
+		//
+		// int ret=0;
+		// for(int j=4; j>=0; --j){
+		// int i = ((int) (Math.random() * 100)) % 2;
+		// System.out.println("i:" + i);
+		// ret = (ret << 1) | i;
+		// }
+		// System.out.println(ret);
+		// 11010
 	}
 }

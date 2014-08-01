@@ -1,4 +1,5 @@
 package datastruct;
+
 /**
  * Java 实现的双向链表。 注：java自带的集合包中有实现双向链表，路径是:java.util.LinkedList
  * 
@@ -13,11 +14,11 @@ public class DoubleLink<T> {
 
 	// 双向链表"节点"对应的结构体
 	private class DNode<T> {
-		public DNode prev;
-		public DNode next;
+		public DNode<T> prev;
+		public DNode<T> next;
 		public T value;
 
-		public DNode(T value, DNode prev, DNode next) {
+		public DNode(T value, DNode<T> prev, DNode<T> next) {
 			this.value = value;
 			this.prev = prev;
 			this.next = next;
@@ -31,54 +32,6 @@ public class DoubleLink<T> {
 		mHead.prev = mHead.next = mHead;
 		// 初始化“节点个数”为0
 		mCount = 0;
-	}
-
-	// 返回节点数目
-	public int size() {
-		return mCount;
-	}
-
-	// 返回链表是否为空
-	public boolean isEmpty() {
-		return mCount == 0;
-	}
-
-	// 获取第index位置的节点
-	private DNode<T> getNode(int index) {
-		if (index < 0 || index >= mCount)
-			throw new IndexOutOfBoundsException();
-
-		// 正向查找
-		if (index <= mCount / 2) {
-			DNode<T> node = mHead.next;
-			for (int i = 0; i < index; i++)
-				node = node.next;
-
-			return node;
-		}
-
-		// 反向查找
-		DNode<T> rnode = mHead.prev;
-		int rindex = mCount - index - 1;
-		for (int j = 0; j < rindex; j++)
-			rnode = rnode.prev;
-
-		return rnode;
-	}
-
-	// 获取第index位置的节点的值
-	public T get(int index) {
-		return getNode(index).value;
-	}
-
-	// 获取第1个节点的值
-	public T getFirst() {
-		return getNode(0).value;
-	}
-
-	// 获取最后一个节点的值
-	public T getLast() {
-		return getNode(mCount - 1).value;
 	}
 
 	// 将节点插入到第index位置之前
@@ -112,6 +65,46 @@ public class DoubleLink<T> {
 		mCount++;
 	}
 
+	// 获取第index位置的节点
+	private DNode<T> getNode(int index) {
+		if (index < 0 || index >= mCount)
+			throw new IndexOutOfBoundsException();
+
+		// 正向查找
+		if (index <= mCount / 2) {
+			DNode<T> node = mHead.next;
+			for (int i = 0; i < index; i++)
+				node = node.next;
+			return node;
+		}
+
+		// 反向查找
+		DNode<T> rnode = mHead.prev;
+//		int rindex = mCount - index - 1;
+//		for (int j = 0; j < rindex; j++)
+//			rnode = rnode.prev;
+		for(int j=mCount - 1; j> index; j--)
+			rnode = rnode.prev;
+			
+
+		return rnode;
+	}
+
+	// 获取第index位置的节点的值
+	public T get(int index) {
+		return getNode(index).value;
+	}
+
+	// 获取第1个节点的值
+	public T getFirst() {
+		return getNode(0).value;
+	}
+
+	// 获取最后一个节点的值
+	public T getLast() {
+		return getNode(mCount - 1).value;
+	}
+
 	// 删除index位置的节点
 	public void del(int index) {
 		DNode<T> inode = getNode(index);
@@ -129,5 +122,28 @@ public class DoubleLink<T> {
 	// 删除最后一个节点
 	public void deleteLast() {
 		del(mCount - 1);
+	}
+
+	// 返回节点数目
+	public int size() {
+		return mCount;
+	}
+
+	// 返回链表是否为空
+	public boolean isEmpty() {
+		return mCount == 0;
+	}
+
+	public static void main(String[] args) {
+		DoubleLink<Integer> link = new DoubleLink<Integer>();
+		link.appendLast(10);
+		link.appendLast(11);
+		link.appendLast(12);
+		link.appendLast(13);
+		link.insert(3, 20);
+		while(link.mHead.next.value != null){
+			System.out.println(link.mHead.next.value);
+			link.mHead.next = link.mHead.next.next;
+		}
 	}
 }

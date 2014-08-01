@@ -1,4 +1,5 @@
 package sort;
+
 public class MergeSort {
 
 	static int number = 0;
@@ -27,7 +28,8 @@ public class MergeSort {
 			return;
 
 		int mid = (left + right) / 2;
-		//middle = left + ((right - left) >> 1);//样的话left与right的值比较大的时候，其和可能溢出。
+		// middle = left + ((right - left) >>
+		// 1);//这样的话left与right的值比较大的时候，其和可能溢出。
 		// 二路归并排序里面有两个Sort，多路归并排序里面写多个Sort就可以了
 		Sort(a, left, mid);
 		Sort(a, mid + 1, right);
@@ -39,8 +41,7 @@ public class MergeSort {
 
 		int[] tmp = new int[a.length];
 		int r1 = mid + 1;
-		//third记录中间数组的索引
-		int tIndex = left;
+		int tIndex = left;// third记录中间数组的索引
 		int cIndex = left;
 		// 逐个归并
 		while (left <= mid && r1 <= right) {

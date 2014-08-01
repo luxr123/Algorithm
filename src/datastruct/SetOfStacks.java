@@ -46,11 +46,13 @@ public class SetOfStacks {
 		stacks.push(19);
 
 		System.out.println(stacks.stacks.get(0).peek());
-		System.out.println(stacks.popAt(0));
+		System.out.println(stacks.popAt(1));
 		System.out.println(stacks.stacks.get(0).peek());
 	}
 
 	public int popAt(int index) {
+		if (index > stacks.size() - 1)
+			throw new IndexOutOfBoundsException("越界了");
 		return leftShift(index, true);
 	}
 
