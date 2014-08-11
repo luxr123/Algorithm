@@ -1,6 +1,8 @@
 package recursion;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 
 public class Recursion {
 
@@ -218,7 +220,7 @@ public class Recursion {
 	 */
 	private static void pow(long s[][], long a[][], long n) {
 		while (n > 0) {
-			if ((n & 1) == 1)//奇数
+			if ((n & 1) == 1)// 奇数
 				mul(s, s, a);
 			mul(a, a, a);
 			n >>= 1;
@@ -237,7 +239,76 @@ public class Recursion {
 		c[1][1] = t[3];
 	}
 
+	/**
+	 * 反转字符串
+	 */
+	public static String reverse(String str) {
+		if ((null == str) || (str.length() <= 1)) {
+			return str;
+		}
+		return reverse(str.substring(1)) + str.charAt(0);
+	}
+
+	public static String reverse2(String str) {
+		if ((null == str) || (str.length() <= 1)) {
+			return str;
+		}
+		StringBuffer result = new StringBuffer(str);
+		for (int i = 0; i < (str.length() / 2); i++) {
+			int swapIndex = str.length() - 1 - i;
+			char swap = result.charAt(swapIndex);
+			result.setCharAt(swapIndex, result.charAt(i));
+			result.setCharAt(i, swap);
+		}
+		return result.toString();
+	}
+
+	/**
+	 * 反转一个字符串句子中的单词，例如“Do or do not, there is no try.”反转后为“try. no is there
+	 * not, do or Do”假设所有的单词间都是以空格分离的，将标点符号视为单词的一部分。
+	 */
+	public static List<String> reverseWords(List<String> strings) {
+		if ((null == strings) || (strings.size() <= 1)) {
+			return strings;
+		}
+		List<String> list = reverseWords(strings.subList(1, strings.size()));
+		list.add(strings.get(0));
+		return list;
+	}
+
+	public static List<String> reverseWords2(List<String> strings) {
+		if ((null == strings) || (strings.size() <= 1)) {
+			return strings;
+		}
+		for (int i = 0; i < strings.size() / 2; i++) {
+			int swapIndex = strings.size() - 1 - i;
+			String swap = strings.get(swapIndex);
+			strings.set(swapIndex, strings.get(i));
+			strings.set(i, swap);
+		}
+		return strings;
+	}
+
+	static void swap(String[] arr, int i, int j) {
+		String tmp = arr[i];
+		arr[i] = arr[j];
+		arr[j] = tmp;
+	}
+
 	public static void main(String[] args) {
+		System.out.println(reverse("qwertyu"));
+		System.out.println(reverse2("qwertyu"));
+
+		List<String> list = new ArrayList<String>() {
+			{
+				add("a");
+				add("b");
+				add("c");
+			}
+		};
+		reverseWords2(list);
+		System.out.println(list);
+
 		// System.out.println(decimalToBinary(31));
 		// System.out.println(decimalToBinary3(31));
 		// System.out.println(decimalToBinary2(14));

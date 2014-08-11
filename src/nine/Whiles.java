@@ -139,13 +139,13 @@ public class Whiles {
 		// Now, just sort the arrays, using this compareTo method instead of the
 		// usual one
 		 Arrays.sort(array, new AnagramComparator());
-		// for (String s : array)
-		// System.out.println(s);
+		 for (String s : array)
+		 System.out.println(s);
 
-		int a[] = { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
+//		int a[] = { 15, 16, 19, 20, 25, 1, 3, 4, 5, 7, 10, 14 };
 		// 对于有重复元素的数组，上面的算法失效
-		int b[] = { 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
-		System.out.println(search(a, 3));
+//		int b[] = { 2, 2, 2, 2, 2, 2, 2, 2, 3, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2 };
+//		System.out.println(search(a, 3));
 	}
 }
 

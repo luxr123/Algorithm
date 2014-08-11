@@ -28,8 +28,8 @@ public class SearchNum {
 			 * operator to set the nth bit of a byte (e.g.. 10 would correspond
 			 * to the 2nd bit of index 2 in the byte array).
 			 */
-			// bitfield[n>>3] |= 1 << (n & 0X7);
-			bitfield[n / 8] |= 1 << (n % 8);// 第(n % 8)位置置为1
+			bitfield[n >> 3] |= 1 << (n & 0X7);
+			// bitfield[n / 8] |= 1 << (n % 8);// 第(n % 8)位置置为1
 		}
 		in.close();
 		for (int i = 0; i < bitfield.length; i++) {
@@ -49,8 +49,8 @@ public class SearchNum {
 	/*
 	 * 第二种情况:如果你只有10MB的内存呢？
 	 */
-	 static int bitsize = 1048576; // 2^20 bits (2^17 bytes)
-	 static int blockNum = 4096; // 2^12
+	static int bitsize = 1048576; // 2^20 bits (2^17 bytes)
+	static int blockNum = 4096; // 2^12
 	static byte[] bitfield2 = new byte[bitsize / 8];
 	static int[] blocks = new int[blockNum];
 

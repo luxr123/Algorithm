@@ -20,9 +20,9 @@ public class LIS {
 			for (int j = 0; j < i; j++) {
 				if (arr[j] <= arr[i] && dp[i] < dp[j] + 1)
 					dp[i] = dp[j] + 1;
-				if (lis < dp[i])
-					lis = dp[i];
 			}
+			if (lis < dp[i])
+				lis = dp[i];
 		}
 		return lis;
 	}
@@ -84,9 +84,9 @@ public class LIS {
 		// int arr[] = { 2, 5, 1, 8, 3, 6, 7 };
 		int arr[] = { 2, 5, 8, 9, 1, 3, 5, 4 };
 		// int arr[] = { 1, -1, 2, -3, 4, -5, 6, -7 };
-		// System.out.println(lis.lis(arr, arr.length));
+		 System.out.println(lis.lis(arr, arr.length));
 
-		// lis.outputLIS(arr, arr.length - 1);
+		 lis.outputLIS(arr, arr.length - 1);
 		System.out.println(lis.lis2(arr));
 	}
 }

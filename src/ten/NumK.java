@@ -37,10 +37,8 @@ public class NumK {
 				if (res == v5) {
 					q5.poll();
 				} else {
-					if (res == v3) {
-						q3.poll();
-						q3.add(3 * res);
-					}
+					q3.poll();
+					q3.add(3 * res);
 				}
 				q5.add(5 * res);
 			}
@@ -51,9 +49,9 @@ public class NumK {
 
 	public static void main(String[] args) {
 		NumK last = new NumK();
-//		for (int i = 1; i < 20; ++i)
-//			System.out.println(last.getNum(i));
-		System.out.println(last.getNum(5));
-		
+		// for (int i = 1; i < 20; ++i)
+		// System.out.println(last.getNum(i));
+		System.out.println(last.getNum(9));
+
 	}
 }
