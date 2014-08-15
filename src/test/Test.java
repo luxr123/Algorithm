@@ -28,10 +28,6 @@ public class Test {
 		System.out.println(generateGUID(ip, ip));
 		
 		
-//		CRC20 crc20 = new CRC20();
-//		crc20.update(1);
-//		System.out.println(crc20.getValue());
-		
 	}
 
 	private static CRC32 localCRC32Generator = new CRC32();

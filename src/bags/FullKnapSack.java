@@ -28,6 +28,8 @@ public class FullKnapSack {
 	 * <pre>
 	 * f(i,v) = max{ f(i-1,v-k*c[i]) + k*w[i] | 0<=k<=v/c[i] }
 	 * 每件物品有v/c[i]种状态
+	 * Time Complexity  大于O(N*V)
+	 * Space Complexity O(N*V)
 	 * </pre>
 	 */
 	public static void knapsack() {
@@ -51,6 +53,12 @@ public class FullKnapSack {
 			}
 		}
 		System.out.println(maxV[N - 1][V]);
+		for (i = 0; i < N; i++) {
+			for (j = 0; j <= V; j++) {
+				System.out.print(maxV[i][j]);
+				System.out.print(" ");
+			}
+		}
 	}
 
 	/**
@@ -60,6 +68,8 @@ public class FullKnapSack {
 	 * 完全背包二进制拆分思想
 	 * 状态转移方程：f(i,v) = max{ f(i-1,v-2^k*c[i]) + 2^k*w[i] | 0<=k<=log(v/c[i])  }
 	 * 每件物品降低为 log(v/c[i]) 种状态
+	 * Time Complexity  大于O(N*V)
+	 * Space Complexity O(N*V)
 	 * </pre>
 	 * 
 	 * 这种实现方式是对完全背包的基本实现做了一个优化，叫“二进制拆分”。所谓“拆分物体”就是将一种无限件物品拆分成有效的几件物品，
@@ -96,13 +106,94 @@ public class FullKnapSack {
 			}
 		}
 		System.out.println(maxV[N - 1][V]);
+		for (i = 0; i < N; i++) {
+			for (j = 0; j <= V; j++) {
+				System.out.print(maxV[i][j]);
+				System.out.print(" ");
+			}
+			System.out.println();
+		}
+	}
+
+	static int[][] maxValue = new int[201][11]; /* 记录子问题的各状态 */
+	static int[] dp = new int[201]; /* 记录子问题的最优解 */
+
+	/**
+	 * 完全背包中的逆向思维 版本3
+	 * 
+	 * <pre>
+	 * 我们知道，在01背包和完全背包的实现中，都是针对每种物品进行讨论，即外循环都是for i=0…n，然后每种物品对于容量v的变化而求得最大价值；
+	 * 在完全背包中，由于物品的件数无限，所以我们可以倒过来想，我们针对每个容量讨论，外循环为容量，对于每个容量j，我们求j对于所有物品能装载的最大价值，
+	 * 这样一来我们就能将时间复杂度降为O(N*V)了。
+	 * time Complexity  O(N*V)
+	 * Space Complexity O(N*V)
+	 * </pre>
+	 */
+	public static void knapsack3() {
+		int i, j;
+		for (i = 1; i <= V; i++) {
+			int iMaxV = 0; /* 记录子问题i的最优解 */
+			/* 每个容量求面对所有物体能装载的最大价值 */
+			for (j = 0; j < N; j++) {
+				if (i >= weight[j]) {
+					int tmp = dp[i - weight[j]] + value[j];
+					maxValue[i][j] = dp[i - 1] > tmp ? dp[i - 1] : tmp;
+				} else {
+					maxValue[i][j] = dp[i - 1];
+				}
+				if (maxValue[i][j] > iMaxV)
+					iMaxV = maxValue[i][j];
+			}
+			dp[i] = iMaxV;
+		}
+
+		System.out.println(dp[V]);
+
+		for (i = 0; i <= V; i++) {
+			for (j = 0; j < N; j++) {
+				System.out.print(maxValue[i][j]);
+				System.out.print(" ");
+			}
+			System.out.println(dp[i]);
+		}
+	}
+
+	static int[] maxV2 = new int[201]; /* 记录前i个物品中容量v时的最大价值, 物品可重复 */
+
+	/**
+	 * 完全背包使用一维数组 版本4
+	 * 
+	 * <pre>
+	 * 对于01背包和完全背包，无论是空间复杂度还是时间复杂度，最优的方法还是使用一维数组进行实现。
+	 * 基于01背包的分析，由于不必考虑物品的重复放入，故v的循环采用顺序即可。
+	 * 状态转移方程：v =0...V; f(v) = max{ f(v), f(v-c[i])+w[i] }
+	 * Time Complexity  O(N*V)
+	 * Space Complexity O(V)
+	 * </pre>
+	 */
+	public static void knapsack4() {
+		int i, j;
+		for (i = 0; i < N; i++) {
+			for (j = weight[i]; j <= V; j++) {/* j<weight[i]的对前面的状态不会有影响 */
+				int tmp = maxV2[j - weight[i]] + value[i];
+				maxV2[j] = (maxV2[j] > tmp) ? maxV2[j] : tmp;
+			}
+		}
+		System.out.println(maxV2[V]);
 	}
 
 	/**
+	 * <pre>
+	 * PS：值得一提的是，在01背包和完全背包中，我们用到了两种思想，个人认为还是很有用的，其他地方也会用到很多，我们有必要在此留心：
+	 * . 滚动数组压缩空间的思想
+	 * . 二进制拆分的思想
+	 * </pre>
 	 */
 
 	public static void main(String[] args) {
 		// knapsack();
-		knapsack2();
+		 knapsack2();
+		// knapsack3();
+		// knapsack4();
 	}
 }
