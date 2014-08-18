@@ -84,6 +84,32 @@ public class FullKnapSack {
 	 * v/c[i])，是很大的改进。
 	 */
 	public static void knapsack2() {
+		int[] weig = new int[50];
+		int[] val = new int[50];
+		int i, j, k;
+		int count = 0;
+		for (i = 0; i < N; i++) {
+			int num = V/weight[i];
+			// 二进制拆分
+			for (j = 1; j <= num; j <<= 1) {
+				weig[count] = j * weight[i];
+				val[count++] = j * value[i];
+				num -= j;
+			}
+			if(num > 0){
+				weig[count] = num * weight[i];
+				val[count++] = num * value[i];
+			}
+		}
+		for (i = 0; i < count; i++) {
+			for(j=V; j>=weig[i]; j--){
+				int tmp = maxV2[j-weig[i]] + val[i];
+				maxV2[j] = tmp>maxV2[j]?tmp:maxV2[j];
+			}
+		}
+		System.out.println(maxV2[V]);
+	}
+/*	public static void knapsack2() {
 		int i, j, k;
 		for (i = 0; i < N; i++) {
 			for (j = 0; j <= V; j++) {
@@ -91,12 +117,12 @@ public class FullKnapSack {
 					maxV[i][j] = maxV[i - 1][j];
 					if (j / weight[i] >= 1) {
 						int maxTmp = 0;
-						/* 优化之处start */
+						 优化之处start 
 						for (k = 1; k <= j / weight[i]; k <<= 1) {
 							if (maxV[i - 1][j - k * weight[i]] + k * value[i] > maxTmp)
 								maxTmp = maxV[i - 1][j - k * weight[i]] + k * value[i];
 						}
-						/* 优化之处end */
+						 优化之处end 
 						maxV[i][j] = maxV[i][j] > maxTmp ? maxV[i][j] : maxTmp;
 					}
 				} else {
@@ -113,7 +139,7 @@ public class FullKnapSack {
 			}
 			System.out.println();
 		}
-	}
+	}*/
 
 	static int[][] maxValue = new int[201][11]; /* 记录子问题的各状态 */
 	static int[] dp = new int[201]; /* 记录子问题的最优解 */
