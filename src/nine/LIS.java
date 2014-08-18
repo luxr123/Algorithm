@@ -5,8 +5,8 @@ public class LIS {
 	/**
 	 * 最长递增子序列 LIS 设数组长度不超过 30 DP 可输出最长序列值
 	 */
-	/*
-	 * 解法一: 这个方法也最容易想到也是最传统的解决方案，对于该方法和LIS，有以下两点说明：
+	/**
+	 * 解法1: 这个方法也最容易想到也是最传统的解决方案，对于该方法和LIS，有以下两点说明：
 	 * 
 	 * 由LIS可以衍生出来最长非递减子序列，最长递减子序列，道理是一样的。
 	 * 对于输出序列，也是可以再申请一数组pre[i]记录子序列中array[i]的前驱，道理跟本节的实现也是一样的
@@ -44,6 +44,7 @@ public class LIS {
 	}
 
 	/**
+	 * 解法2:
 	 * 最长递增子序列 LIS 设数组长度不超过 30 DP + BinarySearch (只是求出长度)
 	 */
 	int[] MaxV = new int[30]; /* 存储长度i+1（len）的子序列最大元素的最小值 */
@@ -81,12 +82,12 @@ public class LIS {
 
 	public static void main(String[] args) {
 		LIS lis = new LIS();
-		// int arr[] = { 2, 5, 1, 8, 3, 6, 7 };
-		int arr[] = { 2, 5, 8, 9, 1, 3, 5, 4 };
+		 int arr[] = { 2, 5, 1, 8, 3, 6, 7 };
+//		int arr[] = { 2, 5, 8, 9, 1, 3, 5, 4 };
 		// int arr[] = { 1, -1, 2, -3, 4, -5, 6, -7 };
 		 System.out.println(lis.lis(arr, arr.length));
-
-		 lis.outputLIS(arr, arr.length - 1);
-		System.out.println(lis.lis2(arr));
+		 lis.outputLIS(arr, arr.length-1);
+//		 lis.outputLIS(arr, arr.length - 1);
+//		System.out.println(lis.lis2(arr));
 	}
 }

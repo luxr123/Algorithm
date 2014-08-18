@@ -13,8 +13,8 @@ public class ZeroOneKnapSack {
 		// pack1();
 		// pack2();
 		// pack3();
-		// pack4();
-		printPack();
+//		 pack4();
+		 pack5();
 	}
 
 	/**
@@ -59,8 +59,9 @@ public class ZeroOneKnapSack {
 			}
 		}
 		System.out.println(dp[N - 1][V]);
+		
 		for (i = 0; i < N; i++) {
-			for (j = 0; j <= V; ++j) {
+			for (j = 0; j <= V; j++) {
 				System.out.print(dp[i][j]);
 				System.out.print(" ");
 			}
@@ -186,7 +187,7 @@ public class ZeroOneKnapSack {
 	 * 一般来讲，背包问题都是求一个最优值，但是如果要求输出得到这个最优值的方案，就可以根据状态转移方程往后推，由这一状态找到上一状态，依次向前推即可。
 	 * 这样就可以有两种实现方式，一种是直接根据状态转移矩阵向前推，另一种就是使用额外一个状态矩阵记录最优方案的路径，道理都是一样的。
 	 */
-	public static void printPack() {
+	public static void pack5() {
 		int i, j;
 		for (i = 0; i < N; i++) {
 			for (j = 0; j <= V; j++) {
