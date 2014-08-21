@@ -9,7 +9,7 @@ import java.util.BitSet;
 public class BloomFilter {
 	/* BitSet初始分配2^24个bit */
 	private static final int DEFAULT_SIZE = 1 << 25;
-	/* 不同哈希函数的种子，一般应取质数 */
+	/* 不同哈希函数的种子，一般应取质数 -- 个人觉得主要是分布均匀 */
 	private static final int[] seeds = new int[] { 5, 7, 11, 13, 31, 37, 61 };
 	private BitSet bits = new BitSet(DEFAULT_SIZE);
 	/* 哈希函数对象 */
