@@ -16,7 +16,7 @@ public class DistinctNum {
 		for (int i = 0; i < array.length; i++) {
 			int num = array[i];
 			if (bs.get(num)) {
-				System.out.println(num);
+				System.out.format("%d ",num);
 			} else {
 				bs.set(num);
 			}

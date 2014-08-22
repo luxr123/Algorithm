@@ -77,14 +77,22 @@ public class BitMap {
 		}
 	}
 
+	void clear(String s) {
+		// a[i>>5] &= ~(1<<(mas - i & mas));
+		for (int i = 0; i < s.length(); i++) {
+			char c = s.charAt(i);
+			bitfield[c >> SHIFT] &= ~(1 << (c & MASK));
+		}
+	}
+
 	public static void main(String[] args) {
 		BitMap bitMap = new BitMap();
 		String s1 = "abcdefghigklmn";
 		String s2 = "helloworld";
 		System.out.println(bitMap.squeeze1(s1, s2));
-		
+
 		System.out.println(bitMap.squeeze2(s1, s2));
-		
+
 		System.out.println(bitMap.squeeze3(s1, s2));
 
 	}
