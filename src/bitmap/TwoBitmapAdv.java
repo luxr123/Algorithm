@@ -69,7 +69,7 @@ public class TwoBitmapAdv {
 
 		// 现在可以查看每个元素出现的次数
 		for (int i = 0; i < a.length; i++) {
-			System.out.format("%d %d", a[i], bitmap.get(a[i]));
+			System.out.format("%d %d ", a[i], bitmap.get(a[i]));
 		}
 		System.out.println("\n=============\n");
 

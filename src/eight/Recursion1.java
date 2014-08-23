@@ -114,16 +114,16 @@ public class Recursion1 {
 	 * 机器人从(1, 1)走到(m, n)一定要向下走m-1次，向右走n-1次，不管这过程中是怎么走的。
 	 * 因此，一共可能的路径数量就是从总的步数(m-1+n-1)里取出(m-1)步，作为向下走的步子， 剩余的(n-1)步作为向右走的步子。
 	 */
-	public static BigDecimal path1(int m, int n) {
-		BigDecimal d = fact(m - 1 + n - 1);
-		BigDecimal d1 = fact(m - 1).multiply(fact(n - 1));
-		return d.divide(d1);
+	public static int path1(int m, int n) {
+		int d = fact(m - 1 + n - 1);
+		int d1 = fact(m - 1) * fact(n - 1);
+		return d / d1;
 	}
 
-	private static BigDecimal fact(int n) {
+	private static int fact(int n) {
 		if (n == 0)
-			return new BigDecimal(1);
-		return fact(n - 1).multiply(new BigDecimal(n));
+			return 1;
+		return fact(n - 1) * n;
 	}
 
 	/**
@@ -134,7 +134,7 @@ public class Recursion1 {
 	static Stack<Point> sp = new Stack<Point>();
 	final static int MAXN = 20;
 	static int[][] g = new int[MAXN][MAXN];
-	
+
 	static boolean getPath(int m, int n) {
 		Point p = new Point();
 		p.setX(m);
@@ -157,7 +157,7 @@ public class Recursion1 {
 	 * 继续选择向右或者向下走。当机器人走到右下角的格子(M, N)时，即可输出一条路径。 然后程序会退出递归，回到上一个格子，找寻下一条可行路径。
 	 */
 	static Point[] points = new Point[MAXN + MAXN];
-	
+
 	static void printPaths(int m, int n, int M, int N, int len) {
 		if (g[m][n] == 0)
 			return;
