@@ -6,7 +6,63 @@ package tree;
  */
 public class BinaryTree {
 
-	// Root node pointer. Will be null for an empty tree.
+	static int tMaxLength = 0; // 最大距离
+
+	void findMaxLength1(Node root) {
+		// 递归结束
+		if (root == null)
+			return;
+
+		//
+		// 左树为空
+		//
+		if (root.left == null)
+			root.nMaxLeft = 0;
+		//
+		// 右树为空
+		//
+		if (root.right == null)
+			root.nMaxRight = 0;
+		//
+		// 左树不为空
+		//
+		if (root.left != null) {
+			findMaxLength1(root.left);
+		}
+		//
+		// 右树不为空
+		//
+		if (root.right != null) {
+			findMaxLength1(root.right);
+		}
+		//
+		// 求左子树最大距离
+		//
+		if (root.left != null) {
+			int nTempMax = 0;
+			if (root.left.nMaxLeft > root.left.nMaxRight)
+				nTempMax = root.left.nMaxLeft;
+			else
+				nTempMax = root.left.nMaxRight;
+			root.nMaxLeft = nTempMax + 1;
+		}
+		//
+		// 求右子树最大距离
+		//
+		if (root.right != null) {
+			int nTempMax = 0;
+			if (root.right.nMaxLeft > root.right.nMaxRight)
+				nTempMax = root.right.nMaxLeft;
+			else
+				nTempMax = root.right.nMaxRight;
+			root.nMaxRight = nTempMax + 1;
+		}
+		//
+		// 更新最大距离
+		//
+		if ((root.nMaxLeft + root.nMaxRight) > tMaxLength)
+			tMaxLength = root.nMaxLeft + root.nMaxRight;
+	} // Root node pointer. Will be null for an empty tree.
 
 	private Node root;
 
@@ -14,6 +70,8 @@ public class BinaryTree {
 
 		Node left;
 		Node right;
+		int nMaxLeft;
+		int nMaxRight;
 		int data;
 
 		Node(int data) {
@@ -107,7 +165,7 @@ public class BinaryTree {
 	private boolean isBalanced(Node root) {
 		return (maxDepth(root) - minDepth(root) <= 1);
 	}
-	
+
 	/**
 	 * Returns the max root-to-leaf depth of the tree. Uses a recursive helper
 	 * that recurs down to find the max depth.
@@ -123,11 +181,11 @@ public class BinaryTree {
 		int rDepth = maxDepth(node.right);
 		return Math.max(lDepth, rDepth) + 1;
 	}
-	
+
 	public int minDepth() {
 		return minDepth(root);
 	}
-	
+
 	private int minDepth(Node node) {
 		if (node == null)
 			return 0;
@@ -151,6 +209,42 @@ public class BinaryTree {
 		}
 		return current.data;
 	}
+
+	public int maxValue() {
+		return maxValue(root);
+	}
+
+	private int maxValue(Node node) {
+		Node current = node;
+		while (current.right != null) {
+			current = current.right;
+		}
+		return current.data;
+	}
+
+	public int getAbsDiff() {
+		return getAbsDiff(root);
+	}
+
+	public int getAbsDiff(Node node) {
+		Node current = node;
+		while (current.right != null) {
+			current = current.right;
+		}
+		int rigValue = current.data;
+
+		while (current.left != null) {
+			current = current.left;
+		}
+		int lefValue = current.data;
+
+		return Math.abs(rigValue - lefValue);
+
+	}
+
+	// private int getAbsDiff(Node node) {
+	// return Math.abs(maxValue(node) - minValue(root));
+	// }
 
 	public void buildTree(int[] data) {
 		for (int i = 0; i < data.length; i++) {
@@ -367,7 +461,7 @@ public class BinaryTree {
 		else
 			return (false);
 	}
-	
+
 	/**
 	 * 给定一个有序数组(递增)，写程序构建一棵具有最小高度的二叉树。
 	 */
@@ -380,33 +474,28 @@ public class BinaryTree {
 		parent.right = addToTree(arr, mid + 1, end);
 		return parent;
 	}
-	
+
 	public static Node createMinimalBST(int array[]) {
 		return addToTree(array, 0, array.length - 1);
 	}
-	
+
 	public static void main(String[] args) {
 		BinaryTree biTree = new BinaryTree();
 		biTree.insert(5);
 		biTree.insert(6);
 		biTree.insert(3);
+		biTree.insert(-1);
 		// int[] data = { 2, 8, 7, 4 };
 		// biTree.buildTree(data);
 		biTree.printTree();
 
-		System.out.println(biTree.lookup(6));
-		System.out.println(biTree.size());
-		System.out.println(biTree.maxDepth());
-		System.out.println(biTree.minValue());
-		System.out.println(biTree.hasPathSum(8));
-		biTree.printPaths();
+		biTree.findMaxLength1(biTree.root);
+		System.out.format("递归法:%d\n", tMaxLength);
 
-		biTree.doubleTree();
-		biTree.printTree();
-		
-		int[] arr = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-		Node node = BinaryTree.createMinimalBST(arr);
-		biTree.printTree(node);
+		System.out.println(biTree.minValue());
+		System.out.println(biTree.maxValue());
+		System.out.println(biTree.getAbsDiff());
+
 	}
 
 }
