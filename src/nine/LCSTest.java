@@ -1,6 +1,6 @@
 package nine;
 
-public class Test {
+public class LCSTest {
 
 	static int Continumax(String str1, String str2) {
 		int i, len1, len2, len, s1_start, s2_start, idx, curmax, max;
