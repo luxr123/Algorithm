@@ -23,12 +23,12 @@ public class LCS {
 	 * 对于初始化，i==0或者j==0，如果X[i] == Y[j]，dp[i][j] = 1；否则dp[i][j] = 0。
 	 * </pre>
 	 */
-	/* 最长公共子串 DP */
-	int[][] dp = new int[30][30];
 
 	int maxlen, maxindex;
 
 	void LCS_dp(String X, int xlen, String Y, int ylen) {
+		/* 最长公共子串 DP */
+		int[][] dp = new int[30][30];
 		maxlen = maxindex = 0;
 		for (int i = 0; i < xlen; i++) {
 			for (int j = 0; j < ylen; j++) {
@@ -92,7 +92,7 @@ public class LCS {
 
 	Integer[] comlen(String next, String next2) {
 		if ((next.contains(FLAG) && next2.contains(FLAG)) || (!next.contains(FLAG) && !next2.contains(FLAG)))
-			return new Integer[]{0,0};
+			return new Integer[] { 0, 0 };
 		char[] c1 = next.toCharArray();
 		char[] c2 = next2.toCharArray();
 		int maxlen = 0, startIndex = 0;
@@ -106,7 +106,7 @@ public class LCS {
 			}
 			maxlen = maxlen < tmp ? tmp : maxlen;
 		}
-		return new Integer[]{maxlen, startIndex};
+		return new Integer[] { maxlen, startIndex };
 	}
 
 	public static void main(String[] args) {

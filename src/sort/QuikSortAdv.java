@@ -2,13 +2,13 @@ package sort;
 
 public class QuikSortAdv {
 
-	public static int partition(int[] arr, int low, int high) {
+	private static int partition(int[] arr, int low, int high) {
 		int pivot = arr[low]; // 数组的第一个作为中轴
 		while (low < high) {
 			while (low < high && arr[high] >= pivot)
 				high--;
 			arr[low] = arr[high]; // 比中轴小的记录移到低端
-			
+
 			while (low < high && arr[low] <= pivot)
 				low++;
 			arr[high] = arr[low]; // 比中轴大的记录移到高端
@@ -29,7 +29,7 @@ public class QuikSortAdv {
 		// int[] arr = { 1, 4, 6, 2, 5, 8, 7, 6, 9, 12 };
 		int[] arr = { 2, 1, 8, 4, 5, 10, 2, 9, 18, 6 };
 		// System.out.println(partition(arr, 0, 9));
-		quickSort(arr, 0, 9);
+		quickSort(arr, 0, arr.length - 1);
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
 		}
