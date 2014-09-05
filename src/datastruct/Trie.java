@@ -4,7 +4,6 @@ package datastruct;
  * trie树每一层的节点数是26^i级别的。所以为了节省空间。我们用动态链表，或者用数组来模拟动态。空间的花费，不会超过单词数×单词长度。(转自一大牛)
  */
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 public class Trie {
