@@ -6,7 +6,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 public class LPSAdv {
-	static final int MAXN = 1000;
+	static final int MAXN = 2200;
 	int[] wa = new int[MAXN];
 	int[] wb = new int[MAXN];
 	int[] wv = new int[MAXN];
@@ -69,8 +69,9 @@ public class LPSAdv {
 	static String ori2;
 
 	public static void main(String[] args) {
-		String s1 = "abcdefghijklmn";
-		String s2 = "ababceghjklmn";
+		String s1 = "aaafffffbbbbcccaaa";
+		String s2 = "aaafffffccc";
+		long start = System.currentTimeMillis();
 
 		ori1 = s1;
 		ori2 = s2;
@@ -90,9 +91,12 @@ public class LPSAdv {
 		doubling.calheight(r, sa, len);
 
 		System.out.println(Lrs(s));
+		
+		long end = System.currentTimeMillis();
+		System.out.println(end-start);
 	}
 
-	static List<Integer> hasIdx = new ArrayList<>();
+	static List<Integer> hasIdx = new ArrayList<Integer>();
 
 	static int Lrs(String s) {
 		Map<String, Integer> map1 = new LinkedHashMap<String, Integer>();
@@ -162,69 +166,3 @@ public class LPSAdv {
 		return tmp = tmp >= 2 ? (tmp + 1) : 0;
 	}
 }
-
-/*
- * #include<iostream>
-#include<vector>
-#include<algorithm>
-#include<string>
-#include<map>
-#include<queue>
-#include<set>
-#include<math.h>
-#include<cstring>
-using namespace std;
-
-#define rep(i,n) for( int i=0; i<(n); i++ )
-#define sz(x) ((int)(x).size())
-
-typedef long long ll;
-typedef vector<int> vi;
-typedef vector<string> vs;
-typedef vector<long long> vll;
-
-int m,n;
-int dp[2200][2200];
-string stra, strb;
-
-int getcommonlength(int x, int y)
-{
-    if(x<3 || y<3 )
-        return 0;
-    int res=dp[x][y];
-    if( res!=-1)
-        return res;
-
-    res=0;
-    int cnt=1;  //记录倒数后cnt位相同
-    while(x-cnt>=0 && y-cnt>=0 && stra[x-cnt]==strb[y-cnt])
-        cnt++;
-
-    cnt--;      //notice
-    //注意这里，必须遍历所有cnt>=3的可能，考虑数据：gfedcba, gfeedcba
-    while(cnt>=3)
-    {
-        res=max(res,getcommonlength(x-cnt,y-cnt)+cnt);
-        cnt--;
-    }
-    res = max(res,getcommonlength(x-1,y));
-    res = max(res,getcommonlength(x,y-1));
-
-    return (dp[x][y]=res);
-}
-
-int main()
-{
-    cin >> stra;
-    cin >> strb;
-    m=sz(stra);
-    n=sz(strb);
-
-    memset(dp,-1,sizeof(dp));
-    int res=getcommonlength(m,n);
-
-    cout << res << endl;
-
-    return 0;   
-}
- */

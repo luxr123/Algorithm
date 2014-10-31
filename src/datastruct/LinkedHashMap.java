@@ -2,7 +2,7 @@ package datastruct;
 
 public class LinkedHashMap<K, V> extends HashMap<K, V> {
 
-	// 双向循环链表的头结点，整个LinkedHa只哟shMap中只有一个header，
+	// 双向循环链表的头结点，整个LinkedHashMap中只有一个header，
 	// 它将哈希表中所有的Entry贯穿起来，header中不保存key-value对，只保存前后节点的引用
 	private transient Entry<K, V> header;
 
